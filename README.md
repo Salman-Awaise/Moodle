@@ -54,6 +54,25 @@ The workflow is built around preparing drawing data, training a Keras CNN model,
 - **Pillow**: Image conversion, resizing, and file generation.
 - **Jupyter Notebook**: Model experimentation and training workflow.
 - **HDF5**: Stores the trained model in `model_new.h5`.
+## Workflow Flowchart
+
+```mermaid
+flowchart TD
+    A[Raw NumPy bitmap data] --> B[data_preprocess.py]
+    B --> C[Convert drawings to grayscale images]
+    C --> D[Split into train_set and test_set]
+    D --> E[build_model.ipynb]
+    E --> F[Load images with ImageDataGenerator]
+    F --> G[Apply image augmentation]
+    G --> H[Train Keras CNN model]
+    H --> I[Save trained model as model_new.h5]
+    I --> J[app.py Flask application]
+    J --> K[Load model at startup]
+    K --> L[Receive base64 drawing from frontend]
+    L --> M[Preprocess drawing: grayscale, resize, invert]
+    M --> N[Run model prediction]
+    N --> O[Return predicted class as JSON]
+```
 
 ## Methodology
 
